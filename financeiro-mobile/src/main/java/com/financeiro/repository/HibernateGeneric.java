@@ -4,23 +4,28 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
-public class HibernateGeneric<T, ID extends Serializable> {
+import com.financeiro.util.JpaUtil;
 
-	@Inject
+public class HibernateGeneric<T, ID extends Serializable> implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private EntityManager manager;
 
 	private Class<T> classeEntidade;
 
 	@SuppressWarnings("unchecked")
 	public HibernateGeneric() {
-		this.classeEntidade = (Class<T>) ((ParameterizedType) getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[0];
+		this.classeEntidade = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		this.manager = JpaUtil.getEntityManager();
 	}
 
 	public T buscarCodigo(ID id) {

@@ -10,25 +10,28 @@ import javax.persistence.Table;
 
 @Table(name = "usuario")
 @Entity
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, Cloneable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Usuario() {
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
+
 	private String nome;
-	
+
 	private String email;
-	
+
 	private String login;
-	
+
 	private String senha;
-	
+
 	private boolean ativo;
 
 	public Long getCodigo() {
@@ -104,4 +107,9 @@ public class Usuario implements Serializable {
 		return true;
 	}
 
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
 }

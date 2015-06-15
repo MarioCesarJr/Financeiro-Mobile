@@ -20,4 +20,5 @@ public class UsuarioRepository extends HibernateGeneric<Usuario, Long> implement
 		return (Usuario) consulta.uniqueResult();
 	}
 
+
 }

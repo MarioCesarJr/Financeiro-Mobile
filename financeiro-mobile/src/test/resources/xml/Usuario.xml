@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<usuario />
+	<Usuario codigo = "1" nome = "john snow" email = "johnsnow@gmail.com" login = "snow" senha = "2334343"/>
 </dataset>

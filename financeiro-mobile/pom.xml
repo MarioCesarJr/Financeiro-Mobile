@@ -5,8 +5,8 @@
 	<artifactId>financeiro-mobile</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
-		<properties>
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -22,7 +22,7 @@
 			</plugin>
 		</plugins>
 	</build>
- 
+
 	<dependencies>
 
 		<!-- PrimeFaces (biblioteca de componentes) -->
@@ -127,6 +127,14 @@
 			<version>0.1.2</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>    	
-	
+
+		<!-- OmniFaces (utilitarios para JSF) -->
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>2.0</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
 </project>
