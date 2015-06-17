@@ -10,10 +10,12 @@
 
 <f:view renderKitId="PRIMEFACES_MOBILE" />
 
-<h:head></h:head>
+<h:head>
+<h:outputScript library="js" name="jquery.maskMoney.js"/>
+</h:head>
 
 <h:body>
-	<h:form id="edicao">
+	<h:form>
 		<pm:field>
 			<p:outputLabel value="Descrição:" />
 			<p:inputText value="#{contaBean.conta.descricao}" />
@@ -21,23 +23,19 @@
 
 		<pm:field>
 			<p:outputLabel value="Valor:" />
-			<p:inputText value="#{contaBean.conta.valor}" >
-			    <f:convertNumber minFractionDigits="2"/>
+			<p:inputText styleClass="moeda" value="#{contaBean.conta.valor}" >
+			    <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" locale="pt_BR"/>
 			</p:inputText>
 		</pm:field>
 
-		<p:commandButton action="#{contaBean.salvar}" value="Salvar">
-			<f:ajax execute="@form" render=":edicao :listagem" />
-		</p:commandButton>
-	</h:form>
-
-	<h:form id="listagem">
+		<p:commandButton action="#{contaBean.salvar}" value="Salvar" update="@form"/>
+	
 		<p:dataTable value="#{contaBean.lista}" var="conta" rendered="#{!empty contaBean.lista}">
 			<p:column headerText="Descrição">
 				<h:outputText value="#{conta.descricao}" />
 			</p:column>
 			
-			<p:column headerText="Descrição">
+			<p:column headerText="Data Cadastro">
 				<h:outputText value="#{conta.dataCadastro}" >
 				    <f:convertDateTime dateStyle="medium"/>
 				</h:outputText>
@@ -45,10 +43,20 @@
 			
 			<p:column headerText="Valor">
 				<h:outputText value="#{conta.valor}" >
-				    <f:convertNumber minFractionDigits="2"/>
+				    <f:convertNumber type="currency" locale="pt_BR"/>
 				</h:outputText>
 			</p:column>
 		</p:dataTable>
 	</h:form>
+	
+	<script>
+      function configurarMoeda() {
+        $(".moeda").maskMoney({ decimal: ",", thousands: ".", allowZero: true });
+      }
+      
+      $(document).ready(function() {
+        configurarMoeda();
+      });
+    </script>
 </h:body>
 </html>

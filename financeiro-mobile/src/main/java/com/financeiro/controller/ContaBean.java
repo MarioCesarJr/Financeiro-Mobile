@@ -2,10 +2,12 @@ package com.financeiro.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.financeiro.model.Conta;
+import com.financeiro.repository.ContaRepository;
 import com.financeiro.service.ContaService;
 
 @ManagedBean
@@ -13,11 +15,19 @@ import com.financeiro.service.ContaService;
 public class ContaBean {
 
 	private Conta conta = new Conta();
-	private List<Conta> lista = null;
+	private List<Conta> lista;
+	
+	@PostConstruct
+	public void init(){
+		ContaRepository repository = new ContaRepository();
+		this.lista = repository.listarTodos();
+	}
 
 	public void salvar() {
 		ContaService service = new ContaService();
 		service.salvar(this.conta);
+		conta = new Conta();
+		init();
 	}
 
 	public Conta getConta() {
@@ -32,7 +42,4 @@ public class ContaBean {
 		return lista;
 	}
 
-	public void setLista(List<Conta> lista) {
-		this.lista = lista;
-	}
 }
