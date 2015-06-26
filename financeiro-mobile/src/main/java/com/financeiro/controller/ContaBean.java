@@ -15,19 +15,24 @@ import com.financeiro.service.ContaService;
 public class ContaBean {
 
 	private Conta conta = new Conta();
+	
 	private List<Conta> lista;
 	
-	@PostConstruct
+	private LoginUsuarioBean usuario;
+	/*public ContaBean(){
+        lista = new ArrayList<Conta>();
+  }*/
+
+	/*@PostConstruct
 	public void init(){
 		ContaRepository repository = new ContaRepository();
-		this.lista = repository.listarTodos();
-	}
-
+		this.lista = repository.listarContaUsuario(usuario.getIdUsuario());
+	}*/
+	
 	public void salvar() {
 		ContaService service = new ContaService();
 		service.salvar(this.conta);
-		conta = new Conta();
-		init();
+		this.conta = new Conta();
 	}
 
 	public Conta getConta() {
@@ -39,7 +44,17 @@ public class ContaBean {
 	}
 
 	public List<Conta> getLista() {
-		return lista;
+	/*	this.lista = new ArrayList<Conta>();
+		if(this.lista == null){
+			LoginUsuarioBean contextoBean = ContextoUtil.getContextoBean();
+			ContaRepository repository = new ContaRepository();
+			this.lista = repository.listarConta(contextoBean.getUsuarioLogado());
+		}*/
+		return this.lista;
+	}
+	
+	public String contaUsuario(){
+		return "/restrito/conta?faces-redirect=true";
 	}
 
 }

@@ -28,6 +28,7 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	public String salvar() {
+		
         UsuarioService service = new UsuarioService();
         
         String senha = this.usuario.getSenha();
@@ -37,7 +38,7 @@ public class UsuarioBean implements Serializable {
         }
 		
         service.salvar(this.usuario);
-        
+         
         return "usuarioSucesso";
 	
 

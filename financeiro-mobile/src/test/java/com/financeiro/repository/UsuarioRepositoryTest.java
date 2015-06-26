@@ -1,12 +1,13 @@
 package com.financeiro.repository;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.financeiro.model.Usuario;
 import com.jintegrity.core.JIntegrity;
 import com.jintegrity.helper.JPAHelper;
-import static org.junit.Assert.assertEquals;
 
 public class UsuarioRepositoryTest {
 
@@ -31,4 +32,6 @@ public class UsuarioRepositoryTest {
 		assertEquals("snow", usuario.getLogin());
 		assertEquals("2334343", usuario.getSenha());
 	}
+	
+	
 }
