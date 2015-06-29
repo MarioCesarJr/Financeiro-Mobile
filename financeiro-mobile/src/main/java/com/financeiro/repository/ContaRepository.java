@@ -3,14 +3,12 @@ package com.financeiro.repository;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Query;
+import javax.persistence.PersistenceException;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 import com.financeiro.model.Conta;
-import com.financeiro.model.Usuario;
 
 public class ContaRepository extends HibernateGeneric<Conta, Long> implements Serializable{
 
@@ -34,5 +32,16 @@ public class ContaRepository extends HibernateGeneric<Conta, Long> implements Se
 		String jpql = "select c from Conta c where c.usuario.codigo = :codigo";
 		return getEntityManager().createQuery(jpql).setParameter("codigo", codigo).getResultList();
 		 
+	}
+	
+	public void excluir(Conta conta) {
+		conta = buscarCodigo(conta.getCodigo());
+		
+		try {
+			getEntityManager().remove(conta);
+			getEntityManager().flush();
+		} catch (PersistenceException e) {
+			e.getMessage();
+		}
 	}
 }

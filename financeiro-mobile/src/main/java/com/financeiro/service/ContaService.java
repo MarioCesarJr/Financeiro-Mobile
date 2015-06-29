@@ -16,5 +16,10 @@ public class ContaService implements Serializable{
 		ContaRepository repository = new ContaRepository();
 		repository.adicionar(conta);
 	}
+	
+	public void excluir(Conta conta){
+		ContaRepository repository = new ContaRepository();
+		repository.excluir(conta);
+ 	}
 
 }

@@ -13,7 +13,10 @@
 <h:head></h:head>
 
 <h:body>
-	
+	<pm:page>
+		<pm:header title=""></pm:header>
+
+		<pm:content>	
 	<h:form>
 	    <p:growl id="growl" />
 	    
@@ -28,7 +31,7 @@
 		<pm:field>
 			<p:outputLabel value="e-mail:" />
 			<p:inputText value="#{usuarioBean.usuario.email}" required="true" maxlength="50" requiredMessage="email inválido">
-		<!--   <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />  -->	
+		         <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" /> 	
 			</p:inputText>
 		</pm:field>
 
@@ -53,6 +56,9 @@
 
 		<p:commandButton value="Salvar" action="#{usuarioBean.salvar}" update="growl" icon="check"/>
 	</h:form>
+</pm:content>
 
+		<pm:footer title=""></pm:footer>
+</pm:page>
 </h:body>
 </html>

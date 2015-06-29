@@ -14,13 +14,20 @@
 </h:head>
 
 <h:body>
-	<pm:field>
-	    
-		<p:outputLabel value="Olá #{loginUsuarioBean.nomeUsuario}" />
-	</pm:field>
-	<h:form>
-		<p:commandButton value="Conta" action="conta" />
-	</h:form>
+	<pm:page>
+		<pm:header title=""></pm:header>
 
+		<pm:content>
+			<pm:field>
+
+				<strong>Olá #{loginUsuarioBean.nomeUsuario}</strong>
+			</pm:field>
+			<h:form>
+				<p:commandButton value="Conta" action="conta" />
+			</h:form>
+		</pm:content>
+
+		<pm:footer title=""></pm:footer>
+	</pm:page>
 </h:body>
 </html>

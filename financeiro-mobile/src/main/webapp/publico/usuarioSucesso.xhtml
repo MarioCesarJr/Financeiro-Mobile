@@ -13,9 +13,18 @@
 <h:head></h:head>
 
 <h:body>
-<p:outputLabel value="#{usuarioBean.usuario.nome}"/>, seja Bem-vindo
+	<pm:page>
+		<pm:header title=""></pm:header>
+
+		<pm:content>
+		<h2>
+		#{usuarioBean.usuario.nome} , seja Bem-vindo.
 Seu cadastro foi efetuado com sucesso.
-<br/>
-Clique <a href="login.xhtml">aqui</a> para efetuar o login.
+Clique <a href="login.xhtml">aqui</a> para efetuar o login.</h2>
+</pm:content>
+
+		<pm:footer title=""></pm:footer>
+	</pm:page>
 </h:body>
+
 </html>

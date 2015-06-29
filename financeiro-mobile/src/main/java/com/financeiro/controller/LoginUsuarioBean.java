@@ -3,9 +3,9 @@ package com.financeiro.controller;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.financeiro.model.Conta;
@@ -22,6 +22,7 @@ public class LoginUsuarioBean {
 	private Usuario usuarioLogin;
 	private List<Conta> lista = null;
 	private Conta conta = new Conta();
+	private Conta contaSelecionada;
 
 	@PostConstruct
 	public void init() {
@@ -35,6 +36,13 @@ public class LoginUsuarioBean {
 		this.conta = new Conta();
         this.lista = null;
         this.getLista();
+	}
+	
+	public void excluir(){
+		ContaService service = new ContaService();
+		service.excluir(contaSelecionada);
+		this.lista = null;
+		this.getLista();
 	}
 
 	public Long getIdUsuario() {
@@ -52,6 +60,9 @@ public class LoginUsuarioBean {
 	public String login() {
 		if (fazerLogin()) {
 			return "/restrito/principal?faces-redirect=true";
+		}else{
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("senha ou usuário incorretos "));
 		}
 
 		return "";
@@ -83,24 +94,6 @@ public class LoginUsuarioBean {
 		this.usuarioLogin = usuarioLogin;
 	}
 
-	public Usuario getUsuarioLogado() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		ExternalContext external = context.getExternalContext();
-		String login = external.getRemoteUser();
-
-		if (this.usuarioLogado == null
-				|| !login.equals(this.usuarioLogado.getLogin())) {
-			if (login != null) {
-				UsuarioRepository repository = new UsuarioRepository();
-				this.usuarioLogado = repository.buscarPorLogin(login);
-
-			}
-		}
-
-		return usuarioLogado;
-	}
-
 	public void setUsuarioLogado(Usuario usuarioLogado) {
 		this.usuarioLogado = usuarioLogado;
 	}
@@ -121,5 +114,13 @@ public class LoginUsuarioBean {
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
+	}
+	
+	public Conta getContaSelecionada() {
+		return contaSelecionada;
+	}
+	
+	public void setContaSelecionada(Conta contaSelecionada) {
+		this.contaSelecionada = contaSelecionada;
 	}
 }

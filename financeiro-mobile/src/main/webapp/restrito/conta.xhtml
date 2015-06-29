@@ -15,6 +15,10 @@
 </h:head>
 
 <h:body>
+<pm:page>
+		<pm:header title=""></pm:header>
+
+		<pm:content>
 	<h:form>
 		<pm:field>
 			<p:outputLabel value="Descrição:" />
@@ -30,19 +34,13 @@
 			</p:inputText>
 		</pm:field>
 
-		<p:commandButton action="#{loginUsuarioBean.salvar}" value="Salvar" update="@form" />
+		<p:commandButton action="#{loginUsuarioBean.salvar}" value="Salvar" update="@form" icon="ui-icon-check"/>
 
 	
-		<p:dataTable value="#{loginUsuarioBean.lista}" var="conta"
-			rendered="#{!empty loginUsuarioBean.lista}">
+		<p:dataTable value="#{loginUsuarioBean.lista}" var="conta" rendered="#{!empty loginUsuarioBean.lista}">
+			
 			<p:column headerText="Descrição">
 				<h:outputText value="#{conta.descricao}" />
-			</p:column>
-
-			<p:column headerText="Data Cadastro">
-				<h:outputText value="#{conta.dataCadastro}">
-					<f:convertDateTime dateStyle="medium" />
-				</h:outputText>
 			</p:column>
 
 			<p:column headerText="Valor">
@@ -50,8 +48,24 @@
 					<f:convertNumber type="currency" locale="pt_BR" />
 				</h:outputText>
 			</p:column>
+			
+			<p:column>
+			    <p:commandButton icon="ui-icon-delete" onclick="PF('dlg1').show();">
+			        <f:setPropertyActionListener target="#{loginUsuarioBean.contaSelecionada}" value="#{conta}" />
+			    </p:commandButton>
+			</p:column>
 		</p:dataTable>
+		
+		<p:dialog header="Conta" widgetVar="dlg1" minHeight="40" showEffect="pop">
+            <h:outputText value="Deseja realmente excluir?" />
+            <p:commandButton value="Sim" action="#{loginUsuarioBean.excluir}"  update="@form" />
+            <p:button value="Não" onclick="PF('dlg1').hide(); return false;" />
+        </p:dialog>
 	</h:form>
+	</pm:content>
+
+		<pm:footer title=""></pm:footer>
+	</pm:page>
 	
 </h:body>
 </html>
