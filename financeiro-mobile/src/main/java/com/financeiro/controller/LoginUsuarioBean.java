@@ -83,6 +83,7 @@ public class LoginUsuarioBean {
 
 	public String logout() {
 		usuarioLogado = null;
+		this.lista = null;
 		return "/publico/login?faces-redirect=true";
 	}
 

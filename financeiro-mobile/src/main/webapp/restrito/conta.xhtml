@@ -16,8 +16,12 @@
 
 <h:body>
 <pm:page>
-		<pm:header title=""></pm:header>
-
+		<pm:header title="">
+		   <p:tabMenu>
+		      <p:menuitem value="Home" icon="ui-icon-home" outcome="principal" iconPos="top"/>
+		   </p:tabMenu>
+		</pm:header>
+              
 		<pm:content>
 	<h:form>
 		<pm:field>
@@ -37,7 +41,8 @@
 		<p:commandButton action="#{loginUsuarioBean.salvar}" value="Salvar" update="@form" icon="ui-icon-check"/>
 
 	
-		<p:dataTable value="#{loginUsuarioBean.lista}" var="conta" rendered="#{!empty loginUsuarioBean.lista}">
+		<p:dataTable value="#{loginUsuarioBean.lista}" var="conta" rendered="#{!empty loginUsuarioBean.lista}"
+		paginator="true" rows="4">
 			
 			<p:column headerText="Descrição">
 				<h:outputText value="#{conta.descricao}" />
